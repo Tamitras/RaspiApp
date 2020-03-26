@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="XamarinApp1.Views.Raspberry"
+             xmlns:vm="clr-namespace:XamarinApp1.ViewModels"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:RaspberryViewModel />
+    </ContentPage.BindingContext>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
+
+                <Button x:Name="ButtonHello" 
+                          BackgroundColor="{Binding ButtonHellpViewModel.BackgroundColor}"
+                          Text="{Binding ButtonHellpViewModel.Text}"
+                          IsEnabled="{Binding ButtonHellpViewModel.Enabled}"
+                          Margin="10,0,10,0"
+                          Clicked="Button_Hello_Clicked"
+                          TextColor="White"></Button>
+
+                <Label x:Name="LabelResponse"
+                       Text="{Binding LabelResponseViewModel.Text}"
+                       BackgroundColor="AliceBlue"
+                       TextColor="Black"
+                       Margin="10,0,10,0"></Label>
+
+                <Label x:Name="LabelLightSensor"
+                       Text="{Binding LabelLightSensorViewModel.Text}"
+                       BackgroundColor="AliceBlue"
+                       TextColor="Black"
+                       Margin="10,0,10,0"></Label>
+
+
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
