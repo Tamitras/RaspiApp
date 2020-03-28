@@ -23,11 +23,19 @@
             <StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
 
                 <Button x:Name="ButtonHello" 
-                          BackgroundColor="{Binding ButtonHellpViewModel.BackgroundColor}"
-                          Text="{Binding ButtonHellpViewModel.Text}"
-                          IsEnabled="{Binding ButtonHellpViewModel.Enabled}"
+                          BackgroundColor="{Binding ButtonHelloViewModel.BackgroundColor}"
+                          Text="{Binding ButtonHelloViewModel.Text}"
+                          IsEnabled="{Binding ButtonHelloViewModel.Enabled}"
                           Margin="10,0,10,0"
                           Clicked="Button_Hello_Clicked"
+                          TextColor="White"></Button>
+
+                <Button x:Name="ButtonToggleLed" 
+                          BackgroundColor="{Binding ButtonToggleLedViewModel.BackgroundColor}"
+                          Text="{Binding ButtonToggleLedViewModel.Text}"
+                          IsEnabled="{Binding ButtonToggleLedViewModel.Enabled}"
+                          Margin="10,0,10,0"
+                          Clicked="Button_ToggleLed_Clicked"
                           TextColor="White"></Button>
 
                 <Label x:Name="LabelResponse"

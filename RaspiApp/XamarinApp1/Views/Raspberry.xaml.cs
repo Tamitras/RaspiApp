@@ -46,14 +46,6 @@ namespace XamarinApp1.Views
                 HttpResponseMessage resp = Client.GetAsync($"Main/Register").Result;
                 resp.EnsureSuccessStatusCode();
                 this.RaspberryViewModel.LabelResponseViewModel.Text = await resp.Content.ReadAsStringAsync();
-
-                resp = Client.GetAsync($"Main/SetGPIO?pin=23?value={!this.LedStatus}").Result;
-                resp.EnsureSuccessStatusCode();
-
-                if (bool.TryParse(await resp.Content.ReadAsStringAsync(), out bool result))
-                {
-                    this.LedStatus = result;
-                }
             }
             catch (Exception ex)
             {
@@ -75,6 +67,37 @@ namespace XamarinApp1.Views
             }
         }
 
+        private async void Button_ToggleLed_Clicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var pin = 23;
 
+                var ledStatusAsInt = !this.LedStatus == true ? 1 : 0;
+
+                HttpResponseMessage resp = Client.GetAsync($"Main/SetGPIO?pin={pin}&value={ledStatusAsInt}").Result;
+                resp.EnsureSuccessStatusCode();
+
+                var res = await resp.Content.ReadAsStringAsync();
+                if(bool.TryParse(res, out bool value))
+                {
+                    this.LedStatus = value;
+                    this.RaspberryViewModel.ButtonToggleLedViewModel.Text = value == true ? $"LED an" : "LED aus";
+
+                    if(this.LedStatus) // LED an
+                    {
+                        this.RaspberryViewModel.ButtonToggleLedViewModel.BackgroundColor = Color.Green;
+                    }
+                    else
+                    {
+                        this.RaspberryViewModel.ButtonToggleLedViewModel.BackgroundColor = Color.Gray;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                this.RaspberryViewModel.ButtonToggleLedViewModel.Text = ex.Message;
+            }
+        }
     }
 }
