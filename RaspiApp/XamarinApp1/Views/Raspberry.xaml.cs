@@ -17,6 +17,7 @@ namespace XamarinApp1.Views
     {
         private static readonly HttpClient Client = new HttpClient();
         private RaspberryViewModel RaspberryViewModel { get; set; }
+        private bool LedStatus { get; set;  }
         public Raspberry()
         {
             InitializeComponent();
@@ -45,6 +46,14 @@ namespace XamarinApp1.Views
                 HttpResponseMessage resp = Client.GetAsync($"Main/Register").Result;
                 resp.EnsureSuccessStatusCode();
                 this.RaspberryViewModel.LabelResponseViewModel.Text = await resp.Content.ReadAsStringAsync();
+
+                resp = Client.GetAsync($"Main/SetGPIO?pin=23?value={!this.LedStatus}").Result;
+                resp.EnsureSuccessStatusCode();
+
+                if (bool.TryParse(await resp.Content.ReadAsStringAsync(), out bool result))
+                {
+                    this.LedStatus = result;
+                }
             }
             catch (Exception ex)
             {
