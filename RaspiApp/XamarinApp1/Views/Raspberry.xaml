@@ -12,7 +12,6 @@
         <vm:RaspberryViewModel />
     </ContentPage.BindingContext>
 
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
