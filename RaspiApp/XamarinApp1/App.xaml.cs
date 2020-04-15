@@ -15,6 +15,7 @@ namespace XamarinApp1
 
             DependencyService.Register<MockDataStore>();
             MainPage = new MainPage();
+            MainPage.BackgroundColor = Color.Gainsboro;
         }
 
         protected override void OnStart()

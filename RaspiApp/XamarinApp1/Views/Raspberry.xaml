@@ -5,8 +5,33 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="XamarinApp1.Views.Raspberry"
-             xmlns:vm="clr-namespace:XamarinApp1.ViewModels"
-             Title="{Binding Title}">
+             xmlns:vm="clr-namespace:XamarinApp1.ViewModels" 
+             xmlns:toolbarviewmodels="clr-namespace:XamarinApp1.ViewModels.ToolbarViewModels"
+             Title="{Binding Title}"
+             BackgroundColor="Black" >
+    
+    <!--BackgroundColor könnte verwendet werden um den Status des Raspi anzuzeigen
+    Rot ==> Nicht verbunden/erreichbar
+    Grün ==> Verbunden-->
+
+    <!--<ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text=""
+            IconImageSource ="{Binding IconPath}" 
+            Order="Primary"
+            Priority="1"
+            Clicked="Button_Hello_Clicked"/>
+    </ContentPage.ToolbarItems>-->
+
+    <ContentPage.ToolbarItems>
+        <toolbarviewmodels:BindableToolbarItem 
+            IsVisible="{Binding BindableToolbarItem.IsVisible}"
+            Text="Online"
+            IconImageSource ="{Binding BindableToolbarItem.IconImageSource}" 
+            Order="Primary"
+            Priority="1"
+            Clicked="Button_Hello_Clicked"/>
+    </ContentPage.ToolbarItems>
 
     <ContentPage.BindingContext>
         <vm:RaspberryViewModel />
@@ -19,7 +44,7 @@
         </Grid.RowDefinitions>
 
         <ScrollView Grid.Row="1">
-            <StackLayout Orientation="Vertical" Padding="16,40,16,40" Spacing="10">
+            <StackLayout Orientation="Vertical" Padding="16,40,16,40" BackgroundColor="Gainsboro" Spacing="5">
 
                 <Button x:Name="ButtonHello" 
                           BackgroundColor="{Binding ButtonHelloViewModel.BackgroundColor}"
@@ -39,16 +64,18 @@
 
                 <Label x:Name="LabelResponse"
                        Text="{Binding LabelResponseViewModel.Text}"
-                       BackgroundColor="AliceBlue"
+                       BackgroundColor="Transparent"
                        TextColor="Black"
+                       TextDecorations="None"
+                       FontAttributes="Bold"
                        Margin="10,0,10,0"></Label>
 
                 <Label x:Name="LabelLightSensor"
                        Text="{Binding LabelLightSensorViewModel.Text}"
-                       BackgroundColor="AliceBlue"
+                       BackgroundColor="Transparent"
                        TextColor="Black"
+                       FontAttributes="Bold"
                        Margin="10,0,10,0"></Label>
-
 
             </StackLayout>
         </ScrollView>
